@@ -8,19 +8,30 @@ export default function CourseCard({ course }) {
       </div>
       <div className='course-item__detail'>
         <CourseCardBody course={course} />
-        <div className='course-item__footer'>
-          <div className='tags'>
-            {course.tags.map((tag) => (
-              <span key={tag} className='badge badge--secondary'>
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className='caption'>
-            <div className='date'>{new Date(course.start).toLocaleDateString('fa-IR')}</div>
-            <span className='badge badge--primary'>{course.status}</span>
-          </div>
-        </div>
+        <CourseCardFooter course={course} />
+      </div>
+    </div>
+  );
+}
+function CourseCardFooter({ course }) {
+  return (
+    <div className='course-item__footer'>
+      <div className='tags'>
+        {course.tags.map((tag) => (
+          <span key={tag} className='badge badge--secondary'>
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div className='caption'>
+        <div className='date'>{new Date(course.start).toLocaleDateString('fa-IR')}</div>
+        <span
+          className={`badge badge--${
+            course.status === 'Active' ? 'primary' : course.status === 'Completed' ? 'secondary' : 'danger'
+          }`}
+        >
+          {course.status}
+        </span>
       </div>
     </div>
   );
